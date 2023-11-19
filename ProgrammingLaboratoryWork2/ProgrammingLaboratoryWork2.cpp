@@ -96,6 +96,30 @@ void searchMinMax(int arr[], int sizeArr, bool isSort) {
 	}
 	endTime = steady_clock::now();
 }
+
+void averageMinMax(int arr[], int sizeArr, bool isSort) {
+	int avgValue = 0;
+	int countAvg = 0;
+
+	searchMinMax(arr, sizeArr, isSort);
+	avgValue = (minValueArr + maxValueArr) / 2;
+	cout << "Average Value in Array: " << avgValue << "\n";
+
+	cout << "Index element array equal to the average value: ";
+	startTime = steady_clock::now();
+	for (int i = 0; i < sizeArr; i++)
+	{
+		if (arr[i] == avgValue)
+		{
+			cout << i << " ";
+			countAvg++;
+		}
+	}
+	endTime = steady_clock::now();
+	cout << "\n";
+	countAvg == 0 ? cout << "Index not found, Count 0\n" : cout << "Count index equal to the average value: " << countAvg << "\n";
+	cout << "Time spent search count average value in array: " << duration_cast<nanoseconds>(endTime - startTime).count() << " nanoseconds.\n";
+}
 int main()
 {   
     bool isLive = true;
@@ -104,15 +128,19 @@ int main()
 		int arrayNum[sizeArray];
 		fillArray(arrayNum, sizeArray);
 		int userSelectNum;
+
+		int chooseUser;
+		bool isSort;
+
 		cout << "Please, Select a number to choose actions with array: \n";
 		cout << "\t 1 - Brute Force Sorting\n";
 		cout << "\t 2 - Quick Sorting\n";
 		cout << "\t 3 - Merge Sorting\n";
 		cout << "\t 4 - Search Min and Max value\n";
 		cout << "\t 5 - Display Average Min and Max\n";
-		cout << "\t 5 - Display Count Less Value\n";
-		cout << "\t 5 - Binary Search\n";
-		cout << "\t 5 - Swap value\n";
+		cout << "\t 6 - Display Count Less Value\n";
+		cout << "\t 7 - Binary Search\n";
+		cout << "\t 8 - Swap value\n";
 		cout << "Number: ";
 		cin >> userSelectNum;
 		cout << "\n";
@@ -146,9 +174,7 @@ int main()
 			break;
 
 		case 4:
-			cout << "============================== Search Min and Max value ================================\n";
-			int chooseUser;
-			bool isSort;
+			cout << "============================= Search Min and Max value ==============================\n";
 			cout << "Do you want Search Min and Max in?\n";
 			cout << "\t1 - UnSorted Array\n";
 			cout << "\t2 - Sorted Array\n";
@@ -174,6 +200,32 @@ int main()
 			cout << "Time spent search min and max value in not sorting array: " << duration_cast<nanoseconds>(endTime - startTime).count() << " nanoseconds.\n";
 			cout << "=====================================================================================\n\n";
 			break;
+
+		case 5:
+			cout << "=========================== Average Min and Max value ===============================\n";
+			cout << "Do you want Average search Min and Max in?\n";
+			cout << "\t1 - UnSorted Array\n";
+			cout << "\t2 - Sorted Array\n";
+			cout << "Number: ";
+			cin >> chooseUser;
+			switch (chooseUser)
+			{
+			case 1:
+				isSort = false;
+				displayArray(arrayNum, sizeArray);
+				averageMinMax(arrayNum, sizeArray, isSort);
+				break;
+
+			case 2:
+				quickSort(arrayNum, 0, sizeArray - 1);
+				isSort = true;
+				displayArray(arrayNum, sizeArray);
+				averageMinMax(arrayNum, sizeArray, isSort);
+				break;
+			default:
+				break;
+			}
+			cout << "=====================================================================================\n\n";
 		default:
 			break;
 		}
