@@ -76,11 +76,11 @@ void quickSort(int arr[], int left, int right) {
 	quickSort(arr, leftArr, right);
 }
 
-void merge(int array[], int const left, int const mid,
-	int const right)
+void merge(int array[], int const left, int const mid, int const right)
 {
 	int const subArrayOne = mid - left + 1;
 	int const subArrayTwo = right - mid;
+
 
 	auto* leftArray = new int[subArrayOne],
 		* rightArray = new int[subArrayTwo];
@@ -147,12 +147,12 @@ void searchMinMax(int arr[], int sizeArr, bool isSort) {
 	}
 	else {
 		minValueArr = arr[0], maxValueArr = arr[0];
-		for (int i = 0; i < sizeArr; i++)
+		for (int i = 1; i < sizeArr; i++)
 		{
-			if (arr[i] <= minValueArr)
+			if (arr[i] < minValueArr)
 				minValueArr = arr[i];
 
-			if (arr[i] >= maxValueArr)
+			if (arr[i] > maxValueArr)
 				maxValueArr = arr[i];
 		}
 	}
@@ -186,10 +186,8 @@ void averageMinMax(int arr[], int sizeArr, bool isSort) {
 void countLessValue(int arr[], int sizeArr, int value) {
 	int countLess = 0;
 	
-	for (countLess = 0; countLess < sizeArr; countLess++)
-	{
-		if (arr[countLess] >= value)
-			break;
+	for (countLess = 0; countLess < sizeArr; countLess++) {
+		if (arr[countLess] >= value) break;
 	}
 
 	cout << "Count less value a: " << countLess << "\n";
@@ -198,13 +196,11 @@ void countLessValue(int arr[], int sizeArr, int value) {
 void countMoreValue(int arr[], int sizeArr, int value) {
 	int countMore;
 	
-	for (countMore = sizeArray - 1; countMore >= 0; countMore--)
-	{
-		if (arr[countMore] <= value)
-			break;
+	for (countMore = sizeArray - 1; countMore >= 0; countMore--) {
+		if (arr[countMore] <= value) break;
 	}
-
 	cout << "Count more value: " << sizeArray - 1 - countMore << "\n";
+
 }
 
 int linearSearch(int arr[], int sizeArr, int value) {
